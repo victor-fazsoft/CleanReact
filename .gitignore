@@ -2,3 +2,4 @@ node_modules
 .vscode
 coverage
 node_modules/.package-lock.json
+public/js
