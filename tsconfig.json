@@ -12,6 +12,7 @@
     "jsx": "react",
     "rootDir": "src",
     "baseUrl": "src",
+    "outDir": "./public/js",
     "paths" : {
       "@/*" : ["*"]
     },
@@ -20,7 +21,6 @@
     "allowSyntheticDefaultImports": true,
     "forceConsistentCasingInFileNames": true,
     "resolveJsonModule": true,
-    "noEmit": true
 
   },
   "include": [
