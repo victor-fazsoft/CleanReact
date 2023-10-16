@@ -5,7 +5,7 @@ import {Spinner} from '@/presentation/components';
 
 const FormStatus = () => {
     return ( 
-        <div className={Styles.errorWrap}>
+        <div data-testid="error-wrap" className={Styles.errorWrap}>
         <Spinner className={Styles.spinner}/>
         <span className={Styles.error}>Erro</span>
     </div>
