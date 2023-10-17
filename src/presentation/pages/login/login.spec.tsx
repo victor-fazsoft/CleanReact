@@ -10,7 +10,9 @@ interface SutTypes {
 
 
 const makeSut = (): SutTypes => {
-    const validationSpy = new ValidationSpy()
+    const validationSpy = new ValidationSpy()    
+    const errorMEssage = "Email validatin error, please verify email and try again"
+    validationSpy.errorMessage = errorMEssage
     const sut = render(<Login validation={validationSpy} />)
     return {
         sut,
@@ -22,7 +24,7 @@ describe('Login component', () => {
     afterEach(cleanup)
 
     test('Should start with initial state', () => {
-        const { sut } = makeSut()
+        const { sut, validationSpy } = makeSut()
 
         const errorWrap = sut.getByTestId('error-wrap')
         expect(errorWrap.childElementCount).toBe(0)
@@ -31,7 +33,7 @@ describe('Login component', () => {
         expect(submitButton.disabled).toBe(true);
 
         const emailStatus = sut.getByTestId('email-status')
-        expect(emailStatus.title).toBe('Campo obrigatório')
+        expect(emailStatus.title).toBe(validationSpy.errorMessage)
         expect(emailStatus.textContent).toBe('🔴')
 
         const passwordStatus = sut.getByTestId('password-status')
@@ -59,6 +61,15 @@ describe('Login component', () => {
     
         expect(validationSpy.fieldName).toBe('password');
         expect(validationSpy.fieldValue).toBe('any-password');
+    });
+
+    test('Should show email error if validation fails', () => {
+        const { sut, validationSpy } = makeSut();
+        const emailInput = sut.getByTestId('email');
+        fireEvent.input(emailInput, { target: { value: 'any-email' } });
+        const emailStatus = sut.getByTestId('email-status')
+        expect(emailStatus.title).toBe(validationSpy.errorMessage)
+        expect(emailStatus.textContent).toBe('🔴')
     });
 
     
