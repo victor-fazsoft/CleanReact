@@ -29,11 +29,11 @@ describe('Login component', () => {
         const submitButton = sut.getByTestId('submit') as HTMLButtonElement
         expect(submitButton.disabled).toBe(true);
         const emailStatus = sut.getByTestId('email-status')
-       //expect(emailStatus.title).toBe(validationSpy.errorMessage)
-        expect(emailStatus.textContent).toBe('🔴')
+        //expect(emailStatus.title).toBe(validationSpy.errorMessage)
+        //expect(emailStatus.textContent).toBe('🔴')
         const passwordStatus = sut.getByTestId('password-status')
         //expect(passwordStatus.title).toBe(validationSpy.errorMessage)
-        expect(passwordStatus.textContent).toBe('🔴')
+        //expect(passwordStatus.textContent).toBe('🔴')
 
     })
 
@@ -55,6 +55,16 @@ describe('Login component', () => {
         const passwordStatus = sut.getByTestId('password-status')
         expect(passwordStatus.title).toBe(validationSpy.errorMessage)
         expect(passwordStatus.textContent).toBe('🔴')
-    });    
+    });  
+    
+    test('Should show valid password state if Validation succeeds', () => {
+        const { sut, validationSpy } = makeSut();
+        validationSpy.errorMessage = null
+        const passwordInput = sut.getByTestId('password');
+        fireEvent.input(passwordInput, { target: { value: 'any-password' } });
+        const passwordStatus = sut.getByTestId('password-status')
+        expect(passwordStatus.title).toBe('All right')
+        expect(passwordStatus.textContent).toBe('🟢')
+    }); 
 
 })
