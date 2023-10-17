@@ -1,14 +1,32 @@
 @import '../../styles/colors.scss';
 
 
-.input {
+
+.inputWrap {
+
     border: 1px solid $primaryLight;
-    line-height: 30px;
     border-radius: 4px;
     width: 20rem;
+    height: 2rem;
     margin: 0.25rem;
+    margin-top: 16px;
+    display: flex;
+    position: relative;
+    align-items: center;
+    
+    input {
+      flex-grow: 1;
+      height: 2rem;
+    }
 
     &:focus {
         outline-color: $primaryLight;
+    }  
+  
+    .status {
+      position: absolute;
+      right: 8px;
+      font-size: 12px;
+      cursor: help;
     }
-}
+  }
