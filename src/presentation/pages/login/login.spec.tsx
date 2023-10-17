@@ -78,4 +78,15 @@ describe('Login component', () => {
         expect(passwordStatus.textContent).toBe('🟢')
     }); 
 
+    test('Should enabled submit button if form is valid', () => {
+        const { sut, validationSpy } = makeSut();
+        validationSpy.errorMessage = null
+        const emailInput = sut.getByTestId('email');
+        fireEvent.input(emailInput, { target: { value: 'any-email' } });
+        const passwordInput = sut.getByTestId('password');
+        fireEvent.input(passwordInput, { target: { value: 'any-password' } });
+        const submitButton = sut.getByTestId('submit') as HTMLButtonElement
+        expect(submitButton.disabled).toBe(false);
+    }); 
+
 })
